@@ -1,0 +1,48 @@
+আমি এই প্রজেক্টটা সময়মতো শেষ করতে পারি নাই, কারণ আমার স্কিল এখনো একদম শুরু পর্যায়ে আর টাইমও খুব কম ছিল। সত্যি বলতে আমি এখনো প্রো না, শুধু বেসিক আর সারফেস লেভেল বুঝি।
+
+তাই আমি AI-এর সাহায্যে ধাপে ধাপে বুঝে নিয়ে বানানোর চেষ্টা করছি। যদিও ওয়েবসাইটটা পুরোপুরি প্রফেশনালি হই নাই, কিন্তু আমি চেস্টা করছি এবং শেখার মাঝেই আছি।
+
+আমি  first learner and  শেখার ইচ্ছা অনেক strong। আমি চাই ধীরে ধীরে ভাল কিছু বানাতে পারি ইনশাআল্লাহ।
+
+যদি কোন ফিডব্যাক দেন, বা কোন ভুল দেখান, তাহলে খুব উপকার হইতো। আমি সেটা ধরেই শেখার চেষ্টা করবো।                                                                                                                         
+🌐 Access the Live Deployed Version (Easiest)
+Simply open this URL in any web browser on any PC:
+https://60h5imceo78e.manus.space
+This is the fully functional version with:
+✅ Working authentication (signup/login )
+✅ Functional demo form
+✅ Complete backend API
+✅ Responsive design for all devices
+Just copy and paste that URL into Chrome, Firefox, Safari, or any modern web browser!
+💻 Run Locally on Your Own PC
+If you want to run it on your own computer for development:
+Prerequisites:
+Node.js (version 18+)
+Git
+A code editor (VS Code recommended)
+Steps:
+Download the source code (I provided the complete source in the previous message)
+Extract the files to a folder on your PC
+Open terminal/command prompt in that folder
+Install dependencies:
+bash
+cd backend
+npm install
+cd ../frontend
+npm install
+Start the servers:
+bash
+# Terminal 1 - Backend
+cd backend
+npm start
+
+# Terminal 2 - Frontend  
+cd frontend
+npm run dev
+Open browser to http://localhost:5173
+📱 Mobile Access
+The deployed version works perfectly on:
+Smartphones (iOS/Android )
+Tablets
+Desktop computers
+Laptops
