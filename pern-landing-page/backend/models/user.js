@@ -3,49 +3,34 @@
 const { Model } = require('sequelize');
 const bcrypt = require('bcryptjs');
 
-module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
-    static associate(models) {
-      // define association here
-    }
-
-    // Method to compare password
-    validPassword(password) {
-      return bcrypt.compareSync(password, this.password);
-    }
-  }
-
-  User.init({
+module.exports = (mongoose) => {
+  const bcrypt = require('bcryptjs');
+  const UserSchema = new mongoose.Schema({
     email: {
-      type: DataTypes.STRING,
+      type: String,
       unique: true,
-      allowNull: false,
-      validate: {
-        isEmail: true,
-      },
+      required: true,
+      lowercase: true,
+      trim: true,
     },
     password: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: String,
+      required: true,
     },
-  }, {
-    sequelize,
-    modelName: 'User',
-    hooks: {
-      beforeCreate: async (user) => {
-        const salt = await bcrypt.genSalt(10);
-        user.password = await bcrypt.hash(user.password, salt);
-      },
-      beforeUpdate: async (user) => {
-        if (user.changed('password')) {
-          const salt = await bcrypt.genSalt(10);
-          user.password = await bcrypt.hash(user.password, salt);
-        }
-      },
-    },
+  }, { timestamps: true });
+
+  UserSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) return next();
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
   });
 
-  return User;
+  UserSchema.methods.validPassword = function (password) {
+    return bcrypt.compareSync(password, this.password);
+  };
+
+  return mongoose.model('User', UserSchema);
 };
 
 

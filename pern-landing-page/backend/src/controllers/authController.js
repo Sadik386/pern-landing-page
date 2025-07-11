@@ -15,7 +15,7 @@ exports.register = async (req, res) => {
     }
 
     // Check if user already exists
-    let user = await User.findOne({ where: { email } });
+    let user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({ 
         success: false, 
@@ -24,16 +24,17 @@ exports.register = async (req, res) => {
     }
 
     // Create new user
-    user = await User.create({ email, password });
+    user = new User({ email, password });
+    await user.save();
     
     // Generate JWT token
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
     
     res.status(201).json({ 
       success: true, 
       token,
       user: {
-        id: user.id,
+        id: user._id,
         email: user.email
       }
     });
@@ -59,7 +60,7 @@ exports.login = async (req, res) => {
     }
 
     // Find user
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ 
         success: false, 
@@ -68,7 +69,7 @@ exports.login = async (req, res) => {
     }
 
     // Check password
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = user.validPassword(password);
     if (!isMatch) {
       return res.status(400).json({ 
         success: false, 
@@ -77,13 +78,13 @@ exports.login = async (req, res) => {
     }
 
     // Generate JWT token
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
     
     res.status(200).json({ 
       success: true, 
       token,
       user: {
-        id: user.id,
+        id: user._id,
         email: user.email
       }
     });
