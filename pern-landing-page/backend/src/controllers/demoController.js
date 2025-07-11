@@ -13,18 +13,15 @@ exports.submitContactForm = async (req, res) => {
     }
 
     // Save to database
-    const contact = await Contact.create({
-      name,
-      email,
-      message
-    });
+    const contact = new Contact({ name, email, message });
+    await contact.save();
 
-    console.log("Contact form submission saved:", contact.toJSON());
+    console.log("Contact form submission saved:", contact.toJSON ? contact.toJSON() : contact);
     
     res.status(200).json({ 
       success: true, 
       message: "Message sent successfully!",
-      id: contact.id
+      id: contact._id
     });
   } catch (error) {
     console.error("Demo form error:", error);
@@ -37,9 +34,7 @@ exports.submitContactForm = async (req, res) => {
 
 exports.getContacts = async (req, res) => {
   try {
-    const contacts = await Contact.findAll({
-      order: [['createdAt', 'DESC']]
-    });
+    const contacts = await Contact.find().sort({ createdAt: -1 });
     
     res.status(200).json({ 
       success: true, 

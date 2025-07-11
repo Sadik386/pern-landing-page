@@ -1,24 +1,6 @@
 {
-  "development": {
-    "username": "postgres",
-    "password": "password",
-    "database": "pern_landing_page_db",
-    "host": "localhost",
-    "dialect": "postgres"
-  },
-  "test": {
-    "username": "postgres",
-    "password": "password",
-    "database": "pern_landing_page_test_db",
-    "host": "localhost",
-    "dialect": "postgres"
-  },
-  "production": {
-    "username": "postgres",
-    "password": "password",
-    "database": "pern_landing_page_prod_db",
-    "host": "localhost",
-    "dialect": "postgres"
-  }
+  "development": {},
+  "test": {},
+  "production": {}
 }
 
